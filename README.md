@@ -17,7 +17,7 @@ react-nodeapp-starter
 npm start
 open http://localhost:8080
 ```
-* Express server: `server.js`
+* Express server file: `server.js`
 * App entry-point file: `src/index.js`
 
 
@@ -35,6 +35,6 @@ npm run build
 * [Install Git](https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps) for automatic deployment, create a bare remote repo
 * Bundle for prod, commit, and push to your Droplet's remote repo
 * Launch `server.js` in your server folder (either directly, or via PM2)
-* *NOTE 1: Be sure to set up a *post-receive* hook to transfer the files from your repo to your server folder*
+* *NOTE 1: Be sure to set up a `post-receive` hook to transfer the files from your repo to your server folder*
 * *NOTE 2: Be sure to first run `npm install` in your server folder (on first push, and whenever you change any of your `package.json` dependencies)*
 * *NOTE 3: Make sure your `NODE_ENV` environment var is set to `production` (you can set it in your `~/.profile` file)*

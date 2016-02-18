@@ -13,7 +13,7 @@ module.exports = {
 
   output: {
     path:     path.join( __dirname, '/public/' ),
-    filename: 'app-[hash].min.js'
+    filename: '[hash].min.js'
   },
 
   module: {
@@ -61,7 +61,7 @@ module.exports = {
       filename: 'index.html'
     }),
 
-    new ExtractTextPlugin( 'app-[hash].min.css', { allChunks: true } ),
+    new ExtractTextPlugin( '[hash].min.css', { allChunks: true } ),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify( process.env.NODE_ENV )

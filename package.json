@@ -1,13 +1,73 @@
 {
   "name": "react-nodeapp-starter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Boilerplate for developing React Node/Express apps on Webpack",
   "main": "server.js",
   "scripts": {
-    "build": "rimraf public && webpack --config ./webpack.config.prod.js --progress --profile --colors"
+    "start": "nodemon server-es6.js --exec babel-node",
+    "build": "rimraf public && webpack --config ./webpack.config.prod.js --progress --profile --colors && babel server-es6.js --out-file ./server.js"
   },
   "author": "Peter Morawiec",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/pmdesgn/react-nodeapp-starter"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ]
+  },
+  "eslintConfig": {
+    "rules": {
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "linebreak-style": [
+        2,
+        "unix"
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
+      "react/jsx-key": 1,
+      "react/jsx-uses-react": 1,
+      "react/no-string-refs": 1,
+      "react/prefer-es6-class": 1,
+      "react/react-in-jsx-scope": 1
+    },
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es6": true,
+      "mocha": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "globals": {
+      "describe": true,
+      "expect": true,
+      "it": true,
+      "TestUtils": true
+    },
+    "plugins": [
+      "react"
+    ]
+  },
   "dependencies": {
     "express": "4.13.4",
     "react": "0.14.7",
@@ -15,6 +75,7 @@
   },
   "devDependencies": {
     "autoprefixer": "6.3.1",
+    "babel-cli": "6.5.1",
     "babel-core": "6.4.0",
     "babel-eslint": "5.0.0-beta6",
     "babel-loader": "6.2.1",
@@ -22,11 +83,13 @@
     "babel-preset-react": "6.3.13",
     "babel-preset-stage-0": "6.3.13",
     "css-loader": "0.23.1",
+    "eslint": "1.10.3",
     "eslint-plugin-react": "3.16.1",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
     "html-webpack-plugin": "2.8.1",
     "node-sass": "3.4.2",
+    "nodemon": "1.8.1",
     "postcss-loader": "0.8.0",
     "rimraf": "2.5.1",
     "sass-loader": "3.1.2",

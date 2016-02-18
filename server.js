@@ -1,55 +1,87 @@
-/* eslint no-console: 0 */
+'use strict';
 
-var path    = require( 'path' );
-var webpack = require( 'webpack' );
-var express = require( 'express' );
-var app     = express();
+var _path = require('path');
 
-// local dev related
-var webpackMiddleware    = require( 'webpack-dev-middleware' );
-var webpackHotMiddleware = require( 'webpack-hot-middleware' );
-var config               = require( './webpack.config.js' );
+var _path2 = _interopRequireDefault(_path);
+
+var _webpack = require('webpack');
+
+var _webpack2 = _interopRequireDefault(_webpack);
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _webpackDevMiddleware = require('webpack-dev-middleware');
+
+var _webpackDevMiddleware2 = _interopRequireDefault(_webpackDevMiddleware);
+
+var _webpackHotMiddleware = require('webpack-hot-middleware');
+
+var _webpackHotMiddleware2 = _interopRequireDefault(_webpackHotMiddleware);
+
+var _webpackConfig = require('./webpack.config.js');
+
+var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // determine env, set appropriate port
+/* eslint no-console: 0 */
+
+// dependencies
 var isDev = process.env.NODE_ENV !== 'production';
-var port  = isDev ? 8080 : 80;
 
-// local dev
+// dev related
+
+var port = isDev ? 5858 : 80;
+
+// set up Express
+var app = (0, _express2.default)();
+
+// settings when running locally (apply Webpack middleware)
 if (isDev) {
-  var compiler = webpack( config );
+  (function () {
+    var compiler = (0, _webpack2.default)(_webpackConfig2.default);
 
-  var middleware = webpackMiddleware( compiler, {
-    publicPath:  config.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      colors:       true,
-      hash:         false,
-      timings:      true,
-      chunks:       false,
-      chunkModules: false,
-      modules:      false
-    }
-  });
+    var middleware = (0, _webpackDevMiddleware2.default)(compiler, {
+      publicPath: _webpackConfig2.default.output.publicPath,
+      contentBase: 'src',
+      stats: {
+        colors: true,
+        hash: false,
+        timings: true,
+        chunks: false,
+        chunkModules: false,
+        modules: false
+      }
+    });
 
-  app.use( middleware );
-  app.use( webpackHotMiddleware( compiler ) );
+    // apply webpack middleware
+    app.use(middleware);
+    app.use((0, _webpackHotMiddleware2.default)(compiler));
 
-  app.get( '*', function response( req, res ) {
-    res.write( middleware.fileSystem.readFileSync( path.join( __dirname, 'public/index.html') ) );
-    res.end();
-  });
+    app.get('*', function response(req, res) {
+      res.write(middleware.fileSystem.readFileSync(_path2.default.join(__dirname, 'public/index.html')));
+      res.end();
+    });
 
-// prod env
+    // settings when running on prod
+  })();
 } else {
-  app.use( express.static( __dirname + '/public' ) );
+    // serve static files
+    app.use(_express2.default.static(__dirname + '/public'));
 
-  app.get( '*', function response( req, res ) {
-    res.sendFile( path.join( __dirname, 'public/index.html' ) );
-  });
-}
+    // return index.html on any route
+    app.get('*', function response(req, res) {
+      res.sendFile(_path2.default.join(__dirname, 'public/index.html'));
+    });
+  }
 
-// server
-app.listen( port, '0.0.0.0', function onStart( err ) {
-  if (err) { console.log( err ); }
-  console.info( 'Serving on port %s...', port );
+// launch server
+app.listen(port, '0.0.0.0', function onStart(err) {
+  if (err) {
+    console.log(err);
+  }
+  console.info('Serving on port %s...', port);
 });

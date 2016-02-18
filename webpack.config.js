@@ -4,7 +4,6 @@ var path              = require( 'path' );
 var webpack           = require( 'webpack' );
 var HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 var autoprefixer      = require( 'autoprefixer' );
-var ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -39,7 +38,7 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
-          'postcss-loader',
+          'postcss-loader'
         ]
       },
       {

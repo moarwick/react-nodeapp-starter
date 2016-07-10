@@ -1,6 +1,6 @@
 {
   "name": "react-nodeapp-starter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Boilerplate for developing React Node/Express apps on Webpack",
   "main": "server.js",
   "scripts": {
@@ -9,9 +9,9 @@
   },
   "author": "Peter Morawiec",
   "license": "MIT",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/pmdesgn/react-nodeapp-starter"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmdesgn/react-nodeapp-starter"
   },
   "babel": {
     "presets": [
